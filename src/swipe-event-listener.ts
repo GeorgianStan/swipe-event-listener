@@ -28,7 +28,7 @@ enum ErrorMessages {
   NO_SWIPE_DIRECTION_ENABLED = "No swipe direction was provided",
 }
 
-export const SwipeEvent = (customOptions: Options) => {
+export const SwipeEventListener = (customOptions: Options) => {
   /**
    * * Declaration
    */
@@ -267,5 +267,5 @@ export const SwipeEvent = (customOptions: Options) => {
   // * init events
   on();
 
-  return { swipeArea: finalOptions.swipeArea, updateOptions, off };
+  return { swipeArea: finalOptions.swipeArea, updateOptions };
 };

@@ -1,12 +1,14 @@
 {
-  "name": "swipe-event",
-  "version": "1.0.0",
+  "name": "swipe-event-listener",
+  "version": "1.0.1",
   "description": "Low level, zero-dependency, minimal swipe event implementation for web.",
-  "main": "index.js",
+  "main": "./dist/swipe-event-listener.js",
+  "types": "dist/swipe-event-listener.d.ts",
   "scripts": {
     "start:dev": "webpack --mode=development --watch --progress",
     "build:prod": "webpack --mode=production",
-    "lint": "tslint -p tsconfig.json -c tslint.json -t stylish"
+    "lint": "tslint -p tsconfig.json -c tslint.json -t stylish",
+    "prepublishOnly": "webpack --mode=production"
   },
   "keywords": [
     "swipe",
@@ -17,6 +19,15 @@
   "files": [
     "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GeoPablo/swipe-event-listener.git"
+  },
+  "homepage": "https://github.com/GeoPablo/swipe-event-listener",
+  "bugs": {
+    "url": "https://github.com/GeoPablo/swipe-event-listener/issues",
+    "email": "georgian.stan8@gmail.com"
+  },
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.9.0",

@@ -14,8 +14,7 @@ export declare enum CustomSwipeEvents {
     swipeLeft = "swipeLeft",
     swipeRight = "swipeRight"
 }
-export declare const SwipeEvent: (customOptions: Options) => {
+export declare const SwipeEventListener: (customOptions: Options) => {
     swipeArea: HTMLElement;
     updateOptions: (newOptions: Options) => void;
-    off: () => void;
 };

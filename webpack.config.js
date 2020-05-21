@@ -4,12 +4,12 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const config = {
   target: "web",
   entry: {
-    index: "./src/swipe-event.ts",
+    index: "./src/swipe-event-listener.ts",
   },
   output: {
     path: path.resolve(__dirname, "./dist"),
-    filename: "swipe-event.js",
-    library: "SwipeEvent",
+    filename: "swipe-event-listener.js",
+    library: "SwipeEventListener",
     libraryTarget: "umd",
     globalObject: "this",
     umdNamedDefine: true,

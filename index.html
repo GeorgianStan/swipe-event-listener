@@ -13,13 +13,13 @@
         margin: 0;
       }
     </style>
-    <script src="./dist/swipe-event.js"></script>
+    <script src="./dist/swipe-event-listener.js"></script>
   </head>
   <body>
     <script>
-      const { SwipeEvent } = window.SwipeEvent;
+      const { SwipeEventListener } = window.SwipeEventListener;
 
-      const { swipeArea, updateOptions, off } = SwipeEvent({
+      const { swipeArea, updateOptions } = SwipeEventListener({
         swipeArea: document.querySelector("body"),
       });
 
