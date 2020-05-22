@@ -8,7 +8,7 @@ Once invoked with a DOM element, simply listen for swipe events.
 ### Browser
 
 ```html
-<script src="https://unpkg.com/browse/swipe-event-listener@1.0.0/dist/swipe-event-listener.js"></script>
+<script src="https://unpkg.com/browse/swipe-event-listener@1.0.1/dist/swipe-event-listener.js"></script>
 ```
 
 Then anywhere in your JavaScript code.
