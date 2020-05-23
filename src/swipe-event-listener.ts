@@ -1,11 +1,11 @@
 export interface Options {
-  swipeSensitivity: number;
-  isSwipeUpDesired: boolean;
-  isSwipeDownDesired: boolean;
-  isSwipeLeftDesired: boolean;
-  isSwipeRightDesired: boolean;
-  listenForTouchEvents: boolean;
-  listenForMouseEvents: boolean;
+  swipeSensitivity?: number;
+  isSwipeUpDesired?: boolean;
+  isSwipeDownDesired?: boolean;
+  isSwipeLeftDesired?: boolean;
+  isSwipeRightDesired?: boolean;
+  listenForTouchEvents?: boolean;
+  listenForMouseEvents?: boolean;
   swipeArea: HTMLElement;
 }
 
