@@ -141,4 +141,4 @@ export declare const SwipeEventListener: (
 
 This project is licensed under the MIT License
 
-## [Changelog](https://github.com/GeorgianStan/swipe-event-listener/blob/v1.0.0/CHANGELOG.md)
+## [Changelog](https://github.com/GeorgianStan/swipe-event-listener/blob/master/CHANGELOG.md)
