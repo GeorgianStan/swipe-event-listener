@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Swipe Event</title>
+
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+      }
+    </style>
+    <script src="../dist/swipe-event-listener.js"></script>
+  </head>
+  <body>
+    <p id="swipe-left"></p>
+    <p id="swipe-right"></p>
+    <p id="swipe-up"></p>
+    <p id="swipe-down"></p>
+    <script>
+      const { SwipeEventListener } = window.SwipeEventListener;
+
+      const { swipeArea, updateOptions } = SwipeEventListener({
+        swipeArea: document.querySelector('body'),
+      });
+
+      swipeArea.addEventListener('swipeDown', () => {
+        document.querySelector('#swipe-down').innerHTML = 1;
+      });
+      swipeArea.addEventListener('swipeUp', () => {
+        document.querySelector('#swipe-up').innerHTML = 1;
+      });
+
+      swipeArea.addEventListener('swipeLeft', () => {
+        document.querySelector('#swipe-left').innerHTML = 1;
+      });
+
+      swipeArea.addEventListener('swipeRight', () => {
+        document.querySelector('#swipe-right').innerHTML = 1;
+      });
+    </script>
+  </body>
+</html>

@@ -15,24 +15,31 @@ interface CursorPosition {
 }
 
 export enum CustomSwipeEvents {
-  swipeUp = "swipeUp",
-  swipeDown = "swipeDown",
-  swipeLeft = "swipeLeft",
-  swipeRight = "swipeRight",
+  swipeUp = 'swipeUp',
+  swipeDown = 'swipeDown',
+  swipeLeft = 'swipeLeft',
+  swipeRight = 'swipeRight',
 }
 
 enum ErrorMessages {
-  NO_SWIPE_ACTION_ENABLED = "You must enable at least on swipe action", // when bot mouse and touch events are false
-  NO_SWIPE_AREA = "No swipe area was provided",
-  UNKNOWN_EVENT = "Unknown even type in browser",
-  NO_SWIPE_DIRECTION_ENABLED = "No swipe direction was provided",
+  NO_SWIPE_ACTION_ENABLED = 'You must enable at least on swipe action', // when bot mouse and touch events are false
+  NO_SWIPE_AREA = 'No swipe area was provided',
+  UNKNOWN_EVENT = 'Unknown even type in browser',
+  NO_SWIPE_DIRECTION_ENABLED = 'No swipe direction was provided',
 }
 
-export const SwipeEventListener = (customOptions: Options) => {
+export interface SwipeEventListener {
+  swipeArea: HTMLElement;
+  updateOptions: (newOptions: Options) => void;
+}
+
+export const SwipeEventListener = (
+  customOptions: Options,
+): SwipeEventListener => {
   /**
    * * Declaration
    */
-  let didDraggingBegin: boolean = false;
+  let didDraggingBegin = false;
   let initialTouchOnX: number | undefined;
   let initialTouchOnY: number | undefined;
 
@@ -87,31 +94,25 @@ export const SwipeEventListener = (customOptions: Options) => {
   };
 
   // * normalize cursor | touch position
-  const normalizeCursorPosition = (
-    e: TouchEvent | MouseEvent
-  ): CursorPosition => {
+  const normalizeCursorPosition = (e: any): CursorPosition => {
     const cursorPosition: CursorPosition = {
       x: undefined,
       y: undefined,
     };
 
     if (
-      e.type === "mousemove" ||
-      e.type === "mousedown" ||
-      e.type === "mousedup"
+      e.type === 'mousemove' ||
+      e.type === 'mousedown' ||
+      e.type === 'mousedup'
     ) {
-      //@ts-ignore
       cursorPosition.x = e.clientX;
-      //@ts-ignore
       cursorPosition.y = e.clientY;
     } else if (
-      e.type === "touchmove" ||
-      e.type === "touchstart" ||
-      e.type === "touchend"
+      e.type === 'touchmove' ||
+      e.type === 'touchstart' ||
+      e.type === 'touchend'
     ) {
-      //@ts-ignore
       cursorPosition.x = e.touches[0].pageX;
-      //@ts-ignore
       cursorPosition.y = e.touches[0].pageY;
     } else {
       throw new Error(ErrorMessages.UNKNOWN_EVENT);
@@ -131,7 +132,7 @@ export const SwipeEventListener = (customOptions: Options) => {
 
   // * on dragging
   const onDragging = (e: TouchEvent | MouseEvent) => {
-    let wasSwipeDetected: boolean = false;
+    let wasSwipeDetected = false;
 
     if (!didDraggingBegin) {
       return;
@@ -142,7 +143,7 @@ export const SwipeEventListener = (customOptions: Options) => {
     if (finalOptions.isSwipeDownDesired) {
       if (initialTouchOnY < cursorPosition.y - finalOptions.swipeSensitivity) {
         const customEvent: CustomEvent = new CustomEvent(
-          CustomSwipeEvents.swipeDown
+          CustomSwipeEvents.swipeDown,
         );
         wasSwipeDetected = true;
         finalOptions.swipeArea.dispatchEvent(customEvent);
@@ -152,7 +153,7 @@ export const SwipeEventListener = (customOptions: Options) => {
     if (finalOptions.isSwipeUpDesired) {
       if (initialTouchOnY > cursorPosition.y + finalOptions.swipeSensitivity) {
         const customEvent: CustomEvent = new CustomEvent(
-          CustomSwipeEvents.swipeUp
+          CustomSwipeEvents.swipeUp,
         );
         wasSwipeDetected = true;
         finalOptions.swipeArea.dispatchEvent(customEvent);
@@ -162,7 +163,7 @@ export const SwipeEventListener = (customOptions: Options) => {
     if (finalOptions.isSwipeLeftDesired) {
       if (initialTouchOnX > cursorPosition.x + finalOptions.swipeSensitivity) {
         const customEvent: CustomEvent = new CustomEvent(
-          CustomSwipeEvents.swipeLeft
+          CustomSwipeEvents.swipeLeft,
         );
         wasSwipeDetected = true;
         finalOptions.swipeArea.dispatchEvent(customEvent);
@@ -172,7 +173,7 @@ export const SwipeEventListener = (customOptions: Options) => {
     if (finalOptions.isSwipeRightDesired) {
       if (initialTouchOnX < cursorPosition.x - finalOptions.swipeSensitivity) {
         const customEvent: CustomEvent = new CustomEvent(
-          CustomSwipeEvents.swipeRight
+          CustomSwipeEvents.swipeRight,
         );
         wasSwipeDetected = true;
         finalOptions.swipeArea.dispatchEvent(customEvent);
@@ -185,7 +186,7 @@ export const SwipeEventListener = (customOptions: Options) => {
   };
 
   // * when drag ends
-  const onDragEnd = (e: TouchEvent | MouseEvent) => {
+  const onDragEnd = () => {
     didDraggingBegin = false;
 
     initialTouchOnX = undefined;
@@ -208,27 +209,27 @@ export const SwipeEventListener = (customOptions: Options) => {
 
   // * remove events listers
   const off = () => {
-    finalOptions.swipeArea.removeEventListener("touchstart", onDragStart);
-    finalOptions.swipeArea.removeEventListener("touchmove", onDragging);
-    finalOptions.swipeArea.removeEventListener("touchend", onDragEnd);
-    finalOptions.swipeArea.removeEventListener("mousedown", onDragStart);
-    finalOptions.swipeArea.removeEventListener("mousemove", onDragging);
-    finalOptions.swipeArea.removeEventListener("mouseup", onDragEnd);
+    finalOptions.swipeArea.removeEventListener('touchstart', onDragStart);
+    finalOptions.swipeArea.removeEventListener('touchmove', onDragging);
+    finalOptions.swipeArea.removeEventListener('touchend', onDragEnd);
+    finalOptions.swipeArea.removeEventListener('mousedown', onDragStart);
+    finalOptions.swipeArea.removeEventListener('mousemove', onDragging);
+    finalOptions.swipeArea.removeEventListener('mouseup', onDragEnd);
   };
 
   // * bind event listeners
   const on = () => {
     // * bind events
     if (finalOptions.listenForTouchEvents) {
-      finalOptions.swipeArea.addEventListener("touchstart", onDragStart);
-      finalOptions.swipeArea.addEventListener("touchmove", onDragging);
-      finalOptions.swipeArea.addEventListener("touchend", onDragEnd);
+      finalOptions.swipeArea.addEventListener('touchstart', onDragStart);
+      finalOptions.swipeArea.addEventListener('touchmove', onDragging);
+      finalOptions.swipeArea.addEventListener('touchend', onDragEnd);
     }
 
     if (finalOptions.listenForMouseEvents) {
-      finalOptions.swipeArea.addEventListener("mousedown", onDragStart);
-      finalOptions.swipeArea.addEventListener("mousemove", onDragging);
-      finalOptions.swipeArea.addEventListener("mouseup", onDragEnd);
+      finalOptions.swipeArea.addEventListener('mousedown', onDragStart);
+      finalOptions.swipeArea.addEventListener('mousemove', onDragging);
+      finalOptions.swipeArea.addEventListener('mouseup', onDragEnd);
     }
   };
 
@@ -237,26 +238,25 @@ export const SwipeEventListener = (customOptions: Options) => {
    */
 
   // * CustomEvent polyfill for CustomEvent
-  if (typeof window !== "undefined") {
+  if (typeof window !== 'undefined') {
     (function () {
-      if (typeof window.CustomEvent === "function") return false;
+      if (typeof window.CustomEvent === 'function') return false;
       function CustomEvent(event: any, params: any) {
         params = params || {
           bubbles: false,
           cancelable: false,
           detail: undefined,
         };
-        var evt = document.createEvent("CustomEvent");
+        const evt = document.createEvent('CustomEvent');
         evt.initCustomEvent(
           event,
           params.bubbles,
           params.cancelable,
-          params.detail
+          params.detail,
         );
         return evt;
       }
       CustomEvent.prototype = window.Event.prototype;
-      //@ts-ignore
       window.CustomEvent = CustomEvent;
     })();
   }

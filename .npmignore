@@ -1,9 +1,17 @@
+# folders
+cypress
 src
-webpack.config.js
-postcss.config.js
-index.html
-tsconfig.json
-tslint.json
-.vscode
+demo
 
+# files
+*.log
+cypress.json
+*.code-workspace
+
+# toolchain
+webpack.config.js
+tsconfig.json
+.eslintrc.js
+
+.vscode
 .git

@@ -50,40 +50,7 @@ const config = {
 
 module.exports = (env, argv) => {
   if (argv.mode === "development") {
-    // * scss
-    config.module.rules.push({
-      test: /\.s?css$/,
-      use: [
-        "style-loader",
-        {
-          loader: "postcss-loader",
-          options: {
-            sourceMap: true,
-            config: {
-              path: "postcss.config.js",
-            },
-          },
-        },
-        "sass-loader",
-      ],
-    });
   } else if (argv.mode === "production") {
-    config.module.rules.push({
-      test: /\.s?css$/,
-      use: [
-        "style-loader",
-        {
-          loader: "postcss-loader",
-          options: {
-            config: {
-              path: "postcss.config.js",
-            },
-          },
-        },
-
-        "sass-loader",
-      ],
-    });
   } else {
     throw new Error("Specify env");
   }

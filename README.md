@@ -8,7 +8,7 @@ Once invoked with a DOM element, simply listen for swipe events.
 ### Browser
 
 ```html
-<script src="https://unpkg.com/browse/swipe-event-listener@1.0.3/dist/swipe-event-listener.js"></script>
+<script src="https://unpkg.com/browse/swipe-event-listener@1.2.0/dist/swipe-event-listener.js"></script>
 ```
 
 Then anywhere in your JavaScript code.
@@ -38,29 +38,29 @@ import { SwipeEventListener } from 'swipe-event-listener`
 OR
 
 ```javascript
-const SwipeListener = require("swipe-listener");
+const SwipeListener = require('swipe-listener');
 ```
 
 ## How to use it
 
 ```javascript
 const { swipeArea, updateOptions } = SwipeEventListener({
-  swipeArea: document.querySelector("body"),
+  swipeArea: document.querySelector('body'),
 });
 
-swipeArea.addEventListener("swipeDown", () => {
-  console.log("swipe down");
+swipeArea.addEventListener('swipeDown', () => {
+  console.log('swipe down');
 });
-swipeArea.addEventListener("swipeUp", () => {
-  console.log("swipe up");
-});
-
-swipeArea.addEventListener("swipeLeft", () => {
-  console.log("swipe left");
+swipeArea.addEventListener('swipeUp', () => {
+  console.log('swipe up');
 });
 
-swipeArea.addEventListener("swipeRight", () => {
-  console.log("swipe right");
+swipeArea.addEventListener('swipeLeft', () => {
+  console.log('swipe left');
+});
+
+swipeArea.addEventListener('swipeRight', () => {
+  console.log('swipe right');
 });
 ```
 
@@ -68,7 +68,7 @@ swipeArea.addEventListener("swipeRight", () => {
 
 ```typescript
 const SwipeEventListener: (
-  customOptions: Options
+  customOptions: Options,
 ) => {
   swipeArea: HTMLElement;
   updateOptions: (newOptions: Options) => void;
@@ -89,12 +89,14 @@ const SwipeEventListener: (
 ## Returned values
 
 ```typescript
-const SwipeEventListener: (
-  customOptions: Options
-) => {
+const SwipeEventListener = (customOptions: Options): SwipeEventListene => {...}
+```
+
+```typescript
+export interface SwipeEventListener {
   swipeArea: HTMLElement;
   updateOptions: (newOptions: Options) => void;
-};
+}
 ```
 
 - **swipeArea** - the same HTMLElement passed as argument
@@ -118,13 +120,13 @@ export interface Options {
   swipeArea: HTMLElement;
 }
 export declare enum CustomSwipeEvents {
-  swipeUp = "swipeUp",
-  swipeDown = "swipeDown",
-  swipeLeft = "swipeLeft",
-  swipeRight = "swipeRight",
+  swipeUp = 'swipeUp',
+  swipeDown = 'swipeDown',
+  swipeLeft = 'swipeLeft',
+  swipeRight = 'swipeRight',
 }
 export declare const SwipeEventListener: (
-  customOptions: Options
+  customOptions: Options,
 ) => {
   swipeArea: HTMLElement;
   updateOptions: (newOptions: Options) => void;
@@ -138,3 +140,5 @@ export declare const SwipeEventListener: (
 ## License
 
 This project is licensed under the MIT License
+
+## [Changelog](https://github.com/GeorgianStan/swipe-event-listener/blob/v1.0.0/CHANGELOG.md)
