@@ -1,6 +1,6 @@
 {
   "name": "swipe-event-listener",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Low level, zero-dependency, minimal swipe event implementation for web.",
   "main": "./dist/swipe-event-listener.js",
   "types": "dist/swipe-event-listener.d.ts",
