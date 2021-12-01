@@ -32,7 +32,7 @@ npm i swipe-event-listener
 Then anywhere in your code.
 
 ```javascript
-import { SwipeEventListener } from 'swipe-event-listener`
+import { SwipeEventListener } from 'swipe-event-listener';
 ```
 
 OR
